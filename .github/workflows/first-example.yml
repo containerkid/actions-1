@@ -10,7 +10,7 @@ jobs:
               run: echo "My first GithubActions"
 
             - name: List files
-              run: ls
+              run:  touch README.md
             
             - name: Read file
               run: cat README.md

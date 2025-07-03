@@ -12,5 +12,5 @@ jobs:
               run: ls -ltra
             - name: executing the commands as script
               run: |
-                chmod +X  ascii.script.sh
+                chmod +X  .github/workflows/ascii.script.sh
                 ./.github/workflows/ascii.script.sh

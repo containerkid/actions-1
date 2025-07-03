@@ -1,4 +1,4 @@
-name: My first workflow
+name: generate the ascii
 
 on: push 
 

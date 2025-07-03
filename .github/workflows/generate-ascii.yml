@@ -11,4 +11,4 @@ jobs:
             - name: List repo files
               run: ls -ltra
             - name: executing the commands as script
-              run: ./ascii.script.sh
+              run: .github/workflows/ascii.script.sh

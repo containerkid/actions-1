@@ -9,7 +9,7 @@ jobs:
             - name: Checkout Repo
               uses: actions/checkout@v4
             - name: Install cowsay in ubuntu
-              run: apt-get install cowsay -y
+              run: sudo apt-get install cowsay -y
 
             - name: List the files
               run: | 

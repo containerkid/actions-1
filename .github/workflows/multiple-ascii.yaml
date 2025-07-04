@@ -1,4 +1,3 @@
-
 name: generate the ascii
 
 on: push
@@ -7,35 +6,43 @@ jobs:
   build_job1:
     runs-on: ubuntu-latest
     steps: 
-    - name: install cowsay program
-      run: sudo apt-get install cowsay -y
-    - name: Execute cowsay CMD
-      run: cowsay -f dragon "Run for cover , i am a dragon --" >> dragon.txt
-    - name: Upload the artifact
-    - uses: actions/upload-artifact@v4
-      with:
-        name: dragon-text
-        path: dragon.txt
+      - name: Install cowsay program
+        run: sudo apt-get install cowsay -y
 
-      
+      - name: Execute cowsay CMD
+        run: cowsay -f dragon "Run for cover, I am a dragon --" >> dragon.txt
+
+      - name: Upload the artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dragon-text
+          path: dragon.txt
+
   test_job2:
-     needs: build_job1
-     runs-on: ubuntu-latest
-     steps:
-     - name: Download the artifact
-     - uses: actions/download-artifact@v4
-       with:
-         name: dragon-text
-         path: dragon.txt
-     - name: Test file exists 
-       run: grep -i "dragon" dragon.txt
-       
+    needs: build_job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download the artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dragon-text
+          path: .
+
+      - name: Test file exists 
+        run: grep -i "dragon" dragon.txt
+
   deploy_job3:
-     needs: [build_job1,test_job2]
-     runs-on: ubuntu-latest
-     steps:
-     - name: read the files
-       run: cat dragon.txt
-     - name: deploy 
-       run: echo "this is deploy job"
-  
+    needs: [build_job1, test_job2]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download the artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dragon-text
+          path: .
+
+      - name: Read the file
+        run: cat dragon.txt
+
+      - name: Deploy
+        run: echo "This is the deploy job"
